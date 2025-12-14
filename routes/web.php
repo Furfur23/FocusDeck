@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('welcome', function () {
-    return view('welcome');})->name('welcome');
+    return view('welcome');
+})->name('welcome');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
-
