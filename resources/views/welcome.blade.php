@@ -47,7 +47,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Login</a>
+      <a class="btn-getstarted" href="{{ route ('login') }}">Login</a>
 
     </div>
   </header>
@@ -63,7 +63,7 @@
             <h1>FocusDeck</h1>
             <p>Sebuah aplikasi manajemen tugas</p>
             <div class="d-flex">
-              <a href="#about" class="btn-get-started">Login</a>
+              <a href="{{ route ('login') }}" class="btn-get-started">Login</a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="100">
