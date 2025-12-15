@@ -25,7 +25,7 @@
   <link href="{{ asset ('enno/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
   <link href="{{ asset ('enno/assets/css/main.css') }}" rel="stylesheet">
 
-  
+
 </head>
 
 <body class="index-page">
@@ -34,7 +34,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="#" class="logo d-flex align-items-center me-auto">
-        
+
         <h1 class="sitename">FocusDeck</h1>
       </a>
 
