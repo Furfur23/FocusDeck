@@ -6,14 +6,27 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TugasController;
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::get('welcome', function () {
     return view('welcome');
 })->name('welcome');
 
+// Login
 Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'loginProses'])->name('loginProses');
 
-Route::get('user', [UserController::class, 'index'])->name('user');
+// Logout
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('tugas', [TugasController::class, 'index'])->name('tugas');
+
+
+
+Route::middleware('checkLogin')->group(function () {
+    // Dashboard
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // User
+    Route::get('user', [UserController::class, 'index'])->name('user');
+    // Tugas
+    Route::get('tugas', [TugasController::class, 'index'])->name('tugas');
+});

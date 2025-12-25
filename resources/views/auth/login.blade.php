@@ -41,16 +41,23 @@
                                             FocusDeck - Login
                                         </h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="{{ route('loginProses') }}">
+                                        @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                placeholder="Masukkan Email Anda" name="email">
+                                            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                placeholder="Masukkan Email Anda" name="email" value="{{ old('email') }}">
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                placeholder="Masukkan Password Anda" name="password">
+                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                placeholder="Masukkan Password Anda" name="password" >
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                         </div>
-                                        <button type="submit" href="#" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                     </form>
@@ -78,7 +85,28 @@
     <script src="{{ asset ('sbadmin2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset ('sbadmin2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset ('sbadmin2/js/sb-admin-2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @session('success')
+    <script>
+        Swal.fire({
+            title: "Good job!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
+    @endsession
+
+    @session('error')
+    <script>
+        Swal.fire({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "error"
+        });
+    </script>
+    @endsession
+    
 </body>
 
 </html>
