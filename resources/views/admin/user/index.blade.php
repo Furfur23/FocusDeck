@@ -9,7 +9,7 @@
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-sm-center justify-content-md-between justify-content-xl-between ">
         <div class="mb-1 mr-2">
-            <a href="" class="btn btn-sm btn-primary">
+            <a href="{{ route('userCreate') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus mr-2"></i>
                 Tambah Data
             </a>
@@ -43,23 +43,37 @@
                     </thead>
 
                     <tbody>
-                        <tr class="text-center">
-                            <td class="text-center">1</td>
-                            <td>Tiger Nixon</td>
+                        @foreach ($user as $item)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $item->nama }}</td>
                             <td class="text-center">
-                                <span class="badge badge-dark badge-pill">Admin</span>
+                                @if ($item->jabatan == 'Admin')
+                                <span class="badge badge-dark">{{ $item->jabatan }}</span>
+                                @else 
+                                <span class="badge badge-info">{{ $item->jabatan }}</span>
+                                @endif
                             </td>
-                            <td>masfur@gmailcom</td>
-                            <td>
-                              <span class="badge badge-danger badge-pill">Belum Ditugaskan</span>
+                            <td class="text-center">
+                                <span class="badge badge-primary">{{ $item->email }}</span>
+                            </td>
+                            <td class="text-center">
+                                @if ($item->is_tugas)
+                                <span class="badge badge-success badge-pill">Sudah Ditugaskan</span>
+                                @else
+                                <span class="badge badge-danger badge-pill">Belum Ditugaskan</span>
+                                @endif
                             </td>
                             <td>
                                 <a href="#" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
-                                    <a href="#" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
