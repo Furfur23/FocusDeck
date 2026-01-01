@@ -48,10 +48,11 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $item->nama }}</td>
                             <td class="text-center">
-                                @if ($item->jabatan == 'Admin')
-                                <span class="badge badge-dark">{{ $item->jabatan }}</span>
-                                @else 
-                                <span class="badge badge-info">{{ $item->jabatan }}</span>
+                                {{-- Menggunakan strtolower agar 'admin', 'Admin', atau 'ADMIN' semua dianggap sama --}}
+                                @if (strtolower($item->jabatan) == 'admin')
+                                <span class="badge badge-dark">Admin</span>
+                                @else
+                                <span class="badge badge-info">{{ ucfirst($item->jabatan) }}</span>
                                 @endif
                             </td>
                             <td class="text-center">

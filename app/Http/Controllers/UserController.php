@@ -14,7 +14,7 @@ class UserController extends Controller
         $data = array(
             'title' => 'Data User',
             'menuAdminUser' => 'active',
-            'user' => User::get(),
+            'user' => User::orderBy('jabatan', 'asc')->get(),
         );
         return view('admin/user/index', $data);
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|confirmed', 
-            'jabatan' => 'required|in:admin,user',
+            'jabatan' => 'required|in:admin,karyawan',
         
         ], [
             'nama.required' => 'Nama wajib diisi.',
