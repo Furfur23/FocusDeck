@@ -46,16 +46,23 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 placeholder="Masukkan Email Anda" name="email" value="{{ old('email') }}">
-                                                @error('email')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                            @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
-                                                placeholder="Masukkan Password Anda" name="password" >
-                                                @error('password')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                            <div class="input-group">
+                                                <input type="password" id="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                    placeholder="Masukkan Password Anda" name="password" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="togglePassword" style="border-top-right-radius: 10rem; border-bottom-right-radius: 10rem; cursor: pointer;">
+                                                        <i class="fas fa-eye" id="eyeIcon"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            @error('password')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
@@ -106,7 +113,21 @@
         });
     </script>
     @endsession
-    
+
 </body>
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    const eyeIcon = document.querySelector('#eyeIcon');
+
+    togglePassword.addEventListener('click', function(e) {
+
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+    });
+</script>
 
 </html>
