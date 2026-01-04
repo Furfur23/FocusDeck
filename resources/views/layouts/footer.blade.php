@@ -13,7 +13,6 @@
     @session('success')
     <script>
         Swal.fire({
-            title: "Good job!",
             text: "{{ session('success') }}",
             icon: "success"
         });

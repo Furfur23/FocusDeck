@@ -59,4 +59,52 @@ class UserController extends Controller
 
         return redirect()->route('user')->with('success', 'Data berhasil ditambahkan.');
     }
+
+     public function edit($id)
+    {
+        $data = array(
+            'title' => 'Edit Data User',
+            'menuAdminUser' => 'active',
+            'user' => User::findorFail($id),
+        );
+        return view('admin/user/edit', $data);
+    }
+
+     public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$id, 
+            'jabatan' => 'required',
+            'password' => 'nullable|confirmed', 
+        
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'jabatan.required' => 'Jabatan wajib dipilih.',
+            'jabatan.in' => 'Jabatan tidak valid.',
+        ]);
+
+        $user = User::findorFail($id);  
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->jabatan = $request->jabatan;
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        return redirect()->route('user')->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findorFail($id);
+        $user->delete();
+
+        return redirect()->route('user')->with('success', 'Data berhasil dihapus.');
+    }
+
 }

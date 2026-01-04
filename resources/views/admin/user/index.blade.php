@@ -66,12 +66,13 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm mr-2">
+                                <a href="{{ route('userEdit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm">
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </button>
+                                @include('admin/user/modal')
                             </td>
                         </tr>
                         @endforeach
