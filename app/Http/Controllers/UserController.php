@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Exports\UserExport;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -107,4 +109,9 @@ class UserController extends Controller
         return redirect()->route('user')->with('success', 'Data berhasil dihapus.');
     }
 
+    public function excel()
+    {
+        $filename = now()->format('d-m-Y_H.i.s');
+        return Excel::download(new UserExport, 'DataUser_' . $filename . '.xlsx');
+    }
 }
