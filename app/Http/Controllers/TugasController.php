@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Tugas;
+
 
 class TugasController extends Controller
 {
@@ -16,4 +18,37 @@ class TugasController extends Controller
         );
         return view('admin/tugas/index', $data);
     }
+
+    public function create()
+    {
+        $data = array(
+            'title' => 'Tambah Tugas Baru',
+            'menuAdminTugas' => 'active',
+            'users' => User::all(),
+        );
+        return view('admin/tugas/create', $data);
+    }
+
+    public function store(Request $request)
+{
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'tugas' => 'required|string|max:255',
+        'tanggal_mulai' => 'required|date',
+        'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+    ]);
+
+    $tugas = new Tugas();
+    $tugas->user_id = $request->user_id;
+    $tugas->tugas = $request->tugas;
+    $tugas->tanggal_mulai = $request->tanggal_mulai;
+    $tugas->tanggal_selesai = $request->tanggal_selesai;
+    $tugas->save();
+
+    $user = User::find($request->user_id);
+    $user->is_tugas = true;
+    $user->save();
+
+    return redirect()->route('tugas')->with('success', 'Tugas berhasil ditambahkan!');
+}
 }
