@@ -2,24 +2,24 @@
 
 @section ('content')
 <h1 class="h3 mb-4 text-gray-800">
-    <i class="fas fa-tasks mr-2"></i>
+    <i class="fas fa-user mr-2"></i>
     {{ $title }}
 </h1>
 
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-sm-center justify-content-md-between justify-content-xl-between ">
         <div class="mb-1 mr-2">
-            <a href="" class="btn btn-sm btn-primary">
+            <a href="{{ route('userCreate') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus mr-2"></i>
                 Tambah Data
             </a>
         </div>
         <div>
-            <a href="" class="btn btn-sm btn-success ">
+            <a href="{{ route('userExcel') }}" class="btn btn-sm btn-success">
                 <i class="fas fa-file-excel mr-2"></i>
                 Excel
             </a>
-            <a href="" class="btn btn-sm btn-danger ">
+            <a href="{{ route('userPdf') }}" class="btn btn-sm btn-danger" target="__blank">
                 <i class="fas fa-file-pdf mr-2"></i>
                 PDF
             </a>
@@ -31,10 +31,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr class="text-center">
-                            <th>Nomor</th>
+                            <th>Nomor</td>
                             <th>Nama</th>
                             <th>Tugas</th>
-                            <th>Taggal Mulai</th>
+                            <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>
                                 <i class="fas fa-cog"></i>
@@ -43,25 +43,32 @@
                     </thead>
 
                     <tbody>
-                        <tr class="text-center">
-                            <td class="text-center">1</td>
-                            <td>Tiger Nixon</td>
+                        @foreach ($tugas as $item)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $item->user->nama }}</td>
+                            
                             <td class="text-center">
-                                Baca Buku
+                                <span class="badge badge-primary">{{ $item->tugas }}</span>
                             </td>
                             <td class="text-center">
-                                <span class="badge badge-info badge-pill">01-12-25</span>
+                                <span class="badge badge-info">{{ $item->tanggal_mulai }}</span>
                             </td>
-                            <td>
-                                <span class="badge badge-info badge-pill">01-12-25</span>
+                            <td class="text-center">
+                                <span class="badge badge-info">{{ $item->tanggal_selesai }}</span>
                             </td>
+                            
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm mr-2">
+                                <a href="{{ route('userEdit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
-                                    <a href="#" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
+                                </a>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $item->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                @include('admin/user/modal')
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

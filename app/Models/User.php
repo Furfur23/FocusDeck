@@ -25,6 +25,9 @@ class User extends Authenticatable
         'is_tugas',
     ];
 
+    public function tugas(){
+        return $this->hasOne(Tugas::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
