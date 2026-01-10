@@ -34,8 +34,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tugas"><span class="text-danger">*</span> Nama Tugas :</label>
-                        <input type="text" class="form-control @error('tugas') is-invalid @enderror" id="tugas" name="tugas" value="{{ old('tugas') }}" placeholder="Misal: Meeting atau Ngoding" required>
+                        <label for="tugas"><span class="text-danger">*</span> Tugas :</label>
+                        <textarea name="tugas" rows="5" class="form-control" @error('tugas') is-invalid @enderror>{{ old('tugas') }}</textarea>
                         @error('tugas') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 

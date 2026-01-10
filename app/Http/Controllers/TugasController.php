@@ -24,7 +24,9 @@ class TugasController extends Controller
         $data = array(
             'title' => 'Tambah Tugas Baru',
             'menuAdminTugas' => 'active',
-            'users' => User::findOrFail(),
+            'users' => User::select('id', 'nama')
+                       ->orderBy('nama', 'asc')
+                       ->get(),
         );
         return view('admin/tugas/create', $data);
     }
