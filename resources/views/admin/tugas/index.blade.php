@@ -65,7 +65,7 @@
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $item->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                
+                                @include('admin/tugas/modal')
                             </td>
                         </tr>
                         @endforeach

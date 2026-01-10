@@ -76,10 +76,22 @@ class TugasController extends Controller
         $tugas->tanggal_mulai = $request->tanggal_mulai;
         $tugas->tanggal_selesai = $request->tanggal_selesai;
         $tugas->save();
-
-       
-        
        
         return redirect()->route('tugas')->with('success', 'Tugas berhasil di Update!');
+    }
+
+    public function destroy($id)
+    {
+        $tugas = Tugas::findOrFail($id);
+        $user = User::find($tugas->user_id);
+        $tugas->delete();
+
+        $hasOtherTasks = Tugas::where('user_id', $user->id)->exists();
+        if (!$hasOtherTasks) {
+            $user->is_tugas = false;
+            $user->save();
+        }
+
+        return redirect()->route('tugas')->with('success', 'Tugas berhasil dihapus!');
     }
 }
