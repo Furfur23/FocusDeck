@@ -7,7 +7,7 @@
 </h1>
 
 <div class="card">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-waring text-white">
         <a href="{{ route('tugas') }}" class="btn btn-sm btn-success">
             <i class="fas fa-arrow-left mr-2"></i>
             Kembali

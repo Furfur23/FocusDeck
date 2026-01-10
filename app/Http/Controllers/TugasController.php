@@ -24,31 +24,62 @@ class TugasController extends Controller
         $data = array(
             'title' => 'Tambah Tugas Baru',
             'menuAdminTugas' => 'active',
-            'users' => User::all(),
+            'users' => User::findOrFail(),
         );
         return view('admin/tugas/create', $data);
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'tugas' => 'required|string|max:255',
-        'tanggal_mulai' => 'required|date',
-        'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-    ]);
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'tugas' => 'required|string|max:255',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+        ]);
 
-    $tugas = new Tugas();
-    $tugas->user_id = $request->user_id;
-    $tugas->tugas = $request->tugas;
-    $tugas->tanggal_mulai = $request->tanggal_mulai;
-    $tugas->tanggal_selesai = $request->tanggal_selesai;
-    $tugas->save();
+        $tugas = new Tugas();
+        $tugas->user_id = $request->user_id;
+        $tugas->tugas = $request->tugas;
+        $tugas->tanggal_mulai = $request->tanggal_mulai;
+        $tugas->tanggal_selesai = $request->tanggal_selesai;
+        $tugas->save();
 
-    $user = User::find($request->user_id);
-    $user->is_tugas = true;
-    $user->save();
+        $user = User::find($request->user_id);
+        $user->is_tugas = true;
+        $user->save();
 
-    return redirect()->route('tugas')->with('success', 'Tugas berhasil ditambahkan!');
-}
+        return redirect()->route('tugas')->with('success', 'Tugas berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $data = array(
+            'title' => 'Edit Data Tugas',
+            'menuAdminTugas' => 'active',
+            "tugas" => Tugas::with('user')->findOrFail($id),
+            
+        );
+        return view('admin/tugas/update', $data);
+    }
+   
+     public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tugas' => 'required|string|max:255',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+        ]);
+
+        $tugas = Tugas::findOrFail($id);
+        $tugas->tugas = $request->tugas;
+        $tugas->tanggal_mulai = $request->tanggal_mulai;
+        $tugas->tanggal_selesai = $request->tanggal_selesai;
+        $tugas->save();
+
+       
+        
+       
+        return redirect()->route('tugas')->with('success', 'Tugas berhasil di Update!');
+    }
 }

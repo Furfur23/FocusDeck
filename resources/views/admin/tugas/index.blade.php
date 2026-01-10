@@ -28,7 +28,7 @@
     <div class="card-body">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr class="text-center">
                             <th>Nomor</td>
@@ -59,13 +59,13 @@
                             </td>
                             
                             <td>
-                                <a href="{{ route('userEdit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
+                                <a href="{{ route('tugasEdit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{ $item->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                @include('admin/user/modal')
+                                
                             </td>
                         </tr>
                         @endforeach
