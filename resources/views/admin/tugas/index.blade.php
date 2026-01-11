@@ -47,7 +47,7 @@
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $item->user->nama }}</td>
-                            
+
                             <td class="text-center">
                                 <span class="badge badge-primary">{{ $item->tugas }}</span>
                             </td>
@@ -57,8 +57,11 @@
                             <td class="text-center">
                                 <span class="badge badge-info">{{ $item->tanggal_selesai }}</span>
                             </td>
-                            
+
                             <td>
+                                <button type="button" class="btn btn-info btn-sm mr-2" data-toggle="modal" data-target="#showModal{{ $item->id }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                                 <a href="{{ route('tugasEdit', $item->id) }}" class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -66,6 +69,7 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 @include('admin/tugas/modal')
+                                @include('admin/tugas/modalshow')
                             </td>
                         </tr>
                         @endforeach
