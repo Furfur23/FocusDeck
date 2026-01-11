@@ -11,28 +11,28 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
 class TugasController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
 
-        if ($user-> jabatan=='Admin') {
+        if ($user->jabatan == 'Admin') {
             $data = array(
-            'title' => 'Data Tugas',
-            'menuAdminTugas' => 'active',
-            'tugas' => Tugas::with('user')->get(),
-        );
-        return view('admin/tugas/index', $data); 
+                'title' => 'Data Tugas',
+                'menuAdminTugas' => 'active',
+                'tugas' => Tugas::with('user')->get(),
+            );
+            return view('admin/tugas/index', $data);
         } else {
-             $data = array(
-            'title' => 'Data Tugas',
-            'menuKaryawanTugas' => 'active',
-            
-        );
-        return view('karyawan/tugas/index', $data); 
+            $data = array(
+                'title' => 'Data Tugas',
+                'menuKaryawanTugas' => 'active',
+                'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
+            );
+            return view('karyawan/tugas/index', $data);
         }
-        
     }
 
     public function create()
@@ -121,13 +121,29 @@ class TugasController extends Controller
 
     public function pdf()
     {
+        $user = Auth::user();
         $filename = now()->format('d-m-Y_H.i.s');
-        $data = array(
-            'tugas' => Tugas::with('user')->orderBy('tanggal_mulai', 'asc')->get(),
-            'title' => 'Data Tugas',
-        );
 
-        $pdf = Pdf::loadView('admin/tugas/pdf', $data);
-        return $pdf->setPaper('a4', 'landscape')->stream('DataTugas_' . $filename . '.pdf');
+        if ($user->jabatan == 'Admin') {
+
+            $data = array(
+                'tugas' => Tugas::with('user')->get(),
+                'title' => 'Data Tugas',
+                'tanggal' => now()->format('d M Y'),
+                'jam' => now()->format('H.i.s'),
+            );
+
+            $pdf = Pdf::loadView('admin/tugas/pdf', $data);
+            return $pdf->setPaper('a4', 'landscape')->stream('DataTugas_' . $filename . '.pdf');
+        } else {
+            $data = array(
+                'tanggal' => now()->format('d M Y'),
+                'jam' => now()->format('H.i.s'),
+                'tugas' => Tugas::with('user')->where('user_id', $user->id)->first(),
+            );
+
+            $pdf = Pdf::loadView('karyawan/tugas/pdf', $data);
+            return $pdf->setPaper('a4', 'potrait')->stream('DataTugas_' . $filename . '.pdf'); 
+        }
     }
 }
