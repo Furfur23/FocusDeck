@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Tugas;
-
+use App\Exports\TugasExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class TugasController extends Controller
 {
@@ -95,5 +97,11 @@ class TugasController extends Controller
         }
 
         return redirect()->route('tugas')->with('success', 'Tugas berhasil dihapus!');
+    }
+
+     public function excel()
+    {
+        $filename = now()->format('d-m-Y_H.i.s');
+        return Excel::download(new TugasExport, 'DataTugas_' . $filename . '.xlsx');
     }
 }
