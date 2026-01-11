@@ -96,19 +96,17 @@
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
           </div>
           <div class="col-xl-12 content" data-aos="fade-up" data-aos-delay="200">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <h3>FocusDeck</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              FocusDeck adalah aplikasi manajemen tugas yang dirancang untuk membantu individu dan tim dalam mengatur, melacak, dan menyelesaikan tugas mereka dengan efisien.
             </p>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Untuk mengatur tugas dengan mudah</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Untuk melacak kemajuan tugas</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Untuk menyelesaikan tugas dengan efisien</span></li>
             </ul>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+              Dengan FocusDeck, Anda dapat meningkatkan produktivitas dan mencapai tujuan Anda dengan lebih efektif.
             </p>
           </div>
         </div>
@@ -124,7 +122,7 @@
       <div class="container section-title" data-aos="fade-up">
         <span>Kontak</span>
         <h2>Kontak</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Jika Anda memiliki pertanyaan hubungi kami.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -138,7 +136,7 @@
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <p>Jalan Ketintang Baru IX, Gayungan, Surabaya</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -146,7 +144,7 @@
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <p>08123456789</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -154,7 +152,7 @@
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
                   <h3>Email Us</h3>
-                  <p>info@example.com</p>
+                  <p>focusdeck@gmail.com</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -173,10 +171,7 @@
   <footer id="footer" class="footer">
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">FocusDeck</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
-      </div>
+      <p>© <span>Copyright2026</span> <strong class="px-1 sitename">FocusDeck</strong> <span>All Rights Reserved</span></p>
     </div>
 
   </footer>

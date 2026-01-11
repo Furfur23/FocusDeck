@@ -64,7 +64,7 @@
                         <select class="form-control" id="jabatan" name="jabatan" @error('jabatan') is-invalid @enderror value="{{ old('jabatan') }}" required>
                             <option value="" disabled selected>Pilih Jabatan</option>
                             <option value="admin">Admin</option>
-                            <option value="user">Karyawan</option>
+                            <option value="karyawan">Karyawan</option>
                         </select>
                         @error('jabatan')
                            <small class="text-danger">{{ $message }}</small>

@@ -79,7 +79,7 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:admin,karyawan',
             'password' => 'nullable|confirmed',
 
         ], [
@@ -88,13 +88,18 @@ class UserController extends Controller
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Email sudah terdaftar.',
             'jabatan.required' => 'Jabatan wajib dipilih.',
-            'jabatan.in' => 'Jabatan tidak valid.',
+            
         ]);
 
-        $user = User::findorFail($id);
+        $user = User::with('tugas')->findorFail($id);
         $user->nama = $request->nama;
         $user->email = $request->email;
         $user->jabatan = $request->jabatan;
+        if ($request->jabatan == 'Admin') {
+            $user->is_tugas = false;
+            $user->tugas()->delete();
+        }
+
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
