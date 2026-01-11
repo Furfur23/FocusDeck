@@ -8,6 +8,7 @@ use App\Models\Tugas;
 use App\Exports\TugasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TugasController extends Controller
 {
@@ -27,8 +28,8 @@ class TugasController extends Controller
             'title' => 'Tambah Tugas Baru',
             'menuAdminTugas' => 'active',
             'users' => User::select('id', 'nama')
-                       ->orderBy('nama', 'asc')
-                       ->get(),
+                ->orderBy('nama', 'asc')
+                ->get(),
         );
         return view('admin/tugas/create', $data);
     }
@@ -62,12 +63,12 @@ class TugasController extends Controller
             'title' => 'Edit Data Tugas',
             'menuAdminTugas' => 'active',
             "tugas" => Tugas::with('user')->findOrFail($id),
-            
+
         );
         return view('admin/tugas/update', $data);
     }
-   
-     public function update(Request $request, $id)
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'tugas' => 'required|string|max:255',
@@ -80,7 +81,7 @@ class TugasController extends Controller
         $tugas->tanggal_mulai = $request->tanggal_mulai;
         $tugas->tanggal_selesai = $request->tanggal_selesai;
         $tugas->save();
-       
+
         return redirect()->route('tugas')->with('success', 'Tugas berhasil di Update!');
     }
 
@@ -99,9 +100,21 @@ class TugasController extends Controller
         return redirect()->route('tugas')->with('success', 'Tugas berhasil dihapus!');
     }
 
-     public function excel()
+    public function excel()
     {
         $filename = now()->format('d-m-Y_H.i.s');
         return Excel::download(new TugasExport, 'DataTugas_' . $filename . '.xlsx');
+    }
+
+    public function pdf()
+    {
+        $filename = now()->format('d-m-Y_H.i.s');
+        $data = array(
+            'tugas' => Tugas::with('user')->orderBy('tanggal_mulai', 'asc')->get(),
+            'title' => 'Data Tugas',
+        );
+
+        $pdf = Pdf::loadView('admin/tugas/pdf', $data);
+        return $pdf->setPaper('a4', 'landscape')->stream('DataTugas_' . $filename . '.pdf');
     }
 }
